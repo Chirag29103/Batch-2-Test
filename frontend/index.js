@@ -143,6 +143,26 @@ document.addEventListener('DOMContentLoaded', async () => {
             renderLeaderboard(sortedData);
         });
 
+        const look = document.getElementById('search');
+        const lookFile = document.getElementById('leaderboard-body');
+
+        look.addEventListener('input', function() {
+        const query = look.value.toLowerCase();
+        const rows = lookFile.querySelectorAll('tr');
+
+        rows.forEach(row => {
+        const names = row.cells[2].textContent.toLowerCase();
+        const rolls = row.cells[1].textContent.toLowerCase(); 
+        
+        if (names.includes(query) || rolls.includes(query)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+});
+
+
     } catch (error) {
         console.error('Error fetching data:', error);
     }
